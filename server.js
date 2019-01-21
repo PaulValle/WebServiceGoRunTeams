@@ -7,7 +7,7 @@ var multer = require('multer');
 const pg    = require('pg');
 
 pg.defaults.ssl = true;
-var conString = "postgres://mdcwahsfvtgmjh:b8f63820c3f105c668ba1d3475ca0f29fe0c5fc3a366ebb2960a7b24eb7e77a9@    ec2-54-243-228-140.compute-1.amazonaws.com:5432/dfq5n60cs8uveo";
+var conString = "postgres://mopjgzwmuynkoa:4abd71c0fd07038e4d8138535a8137fb36f353f279c8e397d850e150d110be5a@ec2-54-235-68-3.compute-1.amazonaws.com:5432/d59s89afknvaip";
 
 var express = require('express');
 var http = require('http'),
@@ -34,7 +34,7 @@ app.use(permitirCrossDomain);
 
 app.get('/listarUsuarios', (req, res, next) => {
     
-            return res.json([{"nombre":"Paul Valle"},{"nombre":"Paul Valle"}]);
+            return res.json([{"nombre":"Paul Valle"},{"nombre":"Yander Santana"}]);
             
        
 });
