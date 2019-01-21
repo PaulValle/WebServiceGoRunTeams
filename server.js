@@ -33,10 +33,23 @@ app.use(permitirCrossDomain);
 
 
 app.get('/listarUsuarios', (req, res, next) => {
-    
-            return res.json([{"nombre":"Paul Valle"},{"nombre":"Yander Santana"}]);
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+
+        client.query('SELECT * FROM usuario', function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+
+            client.end();
+            return res.json(result.rows);
             
-       
+        }); 
+    });
 });
 
 
