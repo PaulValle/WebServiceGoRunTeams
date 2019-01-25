@@ -5,7 +5,7 @@ CREATE TABLE usuario (
   pass VARCHAR(255) NOT NULL,
   nombre VARCHAR(45) NOT NULL);
 
-INSERT INTO  usuario  (usuario ,  pass ,  nombre ) VALUES ('deathpaul', 'paul', 'Paul Valle');
+INSERT INTO  usuario  (mail ,  pass ,  nombre ) VALUES ('deathpaul', 'paul', 'Paul Valle');
 
 
 
