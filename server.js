@@ -98,7 +98,7 @@ app.post('/listarUsuarioId', (req, res) => {
             return res.status(500).json({success: false, data: err});
         }
        
-        client.query("SELECT * FROM usuario WHERE mail='"+ req.body.mail +"';", function(err, result) {
+        client.query('SELECT * FROM usuario WHERE idusuario='+ req.body.idusuario +';', function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }
@@ -163,7 +163,7 @@ app.post('/guardarUsuario', (req, res) => {
        
         console.log("Gorun "+util.inspect(req,false,null));
         
-        client.query("INSERT INTO  usuario  (mail ,  pass ,  nombre ) VALUES ('"+req.body.mail+"', '"+req.body.pass+"', '"+req.body.nombre+"');", function(err, result) {
+        client.query("INSERT INTO  usuario  (usuario ,  pass ,  nombre ) VALUES ('"+req.body.usuario+"', '"+req.body.pass+"', '"+req.body.nombre+"');", function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }
