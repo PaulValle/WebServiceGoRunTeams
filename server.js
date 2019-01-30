@@ -51,6 +51,44 @@ app.get('/listarUsuarios', (req, res, next) => {
         }); 
     });
 });
+app.get('/listarEquipos', (req, res, next) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+
+        client.query('SELECT * FROM equipos', function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+
+            client.end();
+            return res.json(result.rows);
+            
+        }); 
+    });
+});
+app.get('/listarUsuariosxEquipo', (req, res, next) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+
+        client.query('SELECT * FROM usuariosxequipo', function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+
+            client.end();
+            return res.json(result.rows);
+            
+        }); 
+    });
+});
 
 app.post('/listarUsuarioId', (req, res) => {
     var client = new pg.Client(conString);
@@ -73,7 +111,48 @@ app.post('/listarUsuarioId', (req, res) => {
         });      
     });
 });
-
+app.post('/listarEquipoId', (req, res) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+       
+        client.query('SELECT * FROM equipos WHERE idequipo='+ req.body.idequipo +';', function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+            
+            //console.log(result);
+            client.end();
+            return res.json(result.rows);
+            
+           
+        });      
+    });
+});
+app.post('/listarUsuariosxEquipoId', (req, res) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+       
+        client.query('SELECT * FROM usuariosxequipo WHERE idequipo='+ req.body.idequipo +';', function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+            
+            //console.log(result);
+            client.end();
+            return res.json(result.rows);
+            
+           
+        });      
+    });
+});
 app.post('/guardarUsuario', (req, res) => {
     var client = new pg.Client(conString);
     client.connect(function(err) {
@@ -82,9 +161,51 @@ app.post('/guardarUsuario', (req, res) => {
             return res.status(500).json({success: false, data: err});
         }
        
-        console.log("miau "+util.inspect(req,false,null));
+        console.log("Gorun "+util.inspect(req,false,null));
         
         client.query("INSERT INTO  usuario  (usuario ,  pass ,  nombre ) VALUES ('"+req.body.usuario+"', '"+req.body.pass+"', '"+req.body.nombre+"');", function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+            
+            //console.log(result);
+            client.end();
+            return res.json(result.rows);   
+        });   
+    });
+});
+app.post('/guardarEquipo', (req, res) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+       
+        console.log("Gorun "+util.inspect(req,false,null));
+        
+        client.query("INSERT INTO  equipos  (nombre ,  detalle ) VALUES ('"+req.body.nombre+"', '"+req.body.detalle+"');", function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+            
+            //console.log(result);
+            client.end();
+            return res.json(result.rows);   
+        });   
+    });
+});
+app.post('/guardarUsuario', (req, res) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+       
+        console.log("Gorun "+util.inspect(req,false,null));
+        
+        client.query("INSERT INTO  usuariosxequipo  (idequipo ,  idusuario ) VALUES ('"+req.body.idequipo+"', '"+req.body.idusuario+"');", function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }
