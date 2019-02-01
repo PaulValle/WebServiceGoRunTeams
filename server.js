@@ -113,13 +113,14 @@ app.post('/listarUsuarioMail', (req, res) => {
 });
 app.post('/listarEquipoId/:id', (req, res) => {
     var client = new pg.Client(conString);
+    var id=req.params.id;
     client.connect(function(err) {
         if(err) {
             return console.error('could not connect to postgres', err);
             return res.status(500).json({success: false, data: err});
         }
        
-        client.query('SELECT * FROM equipos WHERE idequipo='+ req.body.idequipo +';', function(err, result) {
+        client.query('SELECT * FROM equipos WHERE idequipo='+ id +';', function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }
