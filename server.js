@@ -111,7 +111,7 @@ app.post('/listarUsuarioMail', (req, res) => {
         });      
     });
 });
-app.post('/listarEquipoId/id', (req, res) => {
+app.post('/listarEquipoId/:id', (req, res) => {
     var client = new pg.Client(conString);
     client.connect(function(err) {
         if(err) {
