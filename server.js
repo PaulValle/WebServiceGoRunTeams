@@ -44,10 +44,26 @@ app.get('/listarUsuarios', (req, res, next) => {
             if(err) {
                 return console.error('error running query', err);
             }
-
             client.end();
-            return res.json(result.rows);
-            
+            return res.json(result.rows);   
+        }); 
+    });
+});
+
+app.get('/listarRecorridos', (req, res, next) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+
+        client.query('SELECT * FROM recorridos', function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+            client.end();
+            return res.json(result.rows);   
         }); 
     });
 });
@@ -228,6 +244,28 @@ app.post('/guardarUsuarioEnEquipo', (req, res) => {
         console.log("Gorun "+util.inspect(req,false,null));
         
         client.query("INSERT INTO  usuariosxequipo  (idequipo ,  idusuario ) VALUES ('"+req.body.idequipo+"', '"+req.body.idusuario+"');", function(err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+            
+            //console.log(result);
+            client.end();
+            return res.json(result.rows);   
+        });   
+    });
+});
+
+app.post('/guardarRecorrido', (req, res) => {
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+        if(err) {
+            return console.error('could not connect to postgres', err);
+            return res.status(500).json({success: false, data: err});
+        }
+       
+        console.log("Gorun "+util.inspect(req,false,null));
+        
+        client.query("INSERT INTO recorridos (idusuario ,  fecha , tiempo , distancia ) VALUES ('"+req.body.idusuario+"', '"+req.body.fecha+"', '"+req.body.tiempo+"', '"+req.body.distancia+"');", function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }

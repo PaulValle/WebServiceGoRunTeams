@@ -15,6 +15,13 @@ CREATE TABLE usuariosxequipo (
   idequipo INTEGER NOT NULL,
   idusuario INTEGER NOT NULL);
 
+CREATE TABLE recorridos (
+  idrecorrido SERIAL PRIMARY KEY,
+  idusuario INTEGER NOT NULL,
+  fecha VARCHAR(255) NOT NULL),
+  tiempo VARCHAR(255) NOT NULL),
+  distancia VARCHAR(255) NOT NULL);
+
 
 
 INSERT INTO  usuario  (mail ,  pass ,  nombre ) VALUES ('deathpaul', 'paul', 'Paul Valle');
