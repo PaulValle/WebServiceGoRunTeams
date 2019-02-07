@@ -201,7 +201,7 @@ app.post('/guardarUsuario', (req, res) => {
        
         console.log("Gorun "+util.inspect(req,false,null));
         
-        client.query("INSERT INTO  usuario  (mail ,  pass ,  nombre ) VALUES ('"+req.body.mail+"', '"+req.body.pass+"', '"+req.body.nombre+"');", function(err, result) {
+        client.query("INSERT INTO  usuario  (mail ,  pass ,  nombre , rol , celular) VALUES ('"+req.body.mail+"', '"+req.body.pass+"', '"+req.body.nombre+"', '"+req.body.rol+"', '"+req.body.celular+"');", function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }
@@ -222,7 +222,7 @@ app.post('/guardarEquipo', (req, res) => {
        
         console.log("Gorun "+util.inspect(req,false,null));
         
-        client.query("INSERT INTO  equipos  (nombre ,  detalle ) VALUES ('"+req.body.nombre+"', '"+req.body.detalle+"');", function(err, result) {
+        client.query("INSERT INTO  equipos  (identrenador, nombre ,  detalle ) VALUES ('"+req.body.identrenador+"', '"+req.body.nombre+"', '"+req.body.detalle+"');", function(err, result) {
             if(err) {
                 return console.error('error running query', err);
             }
