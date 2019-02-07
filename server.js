@@ -110,26 +110,26 @@ app.put('/actualizarUsuario',(req,res)=>{
     });
 });
 
-app.put('/actualizarUsuario/:id',(req,res)=>{
+app.put('/actualizarInformacion',(req,res)=>{
     var client = new pg.Client(conString);
-    var idusuario=req.body.id;
+    var idusuario=req.body.idusuario;
+    
     client.connect(function(err) {
         if(err) {
             return console.error('could not connect to postgres', err);
-            return res.status(500).json({success: false, data: err});
         }
-
-        client.query("UPDATE usuario SET mail='"+req.body.mail+"', pass='"+req.body.pass+"', nombre='"+req.body.nombre+"',rol='"+req.body.rol+"',celular='"+req.body.celular+"' WHERE idusuario='" + idusuario + "';", function(err, result) {
+  
+        client.query("UPDATE usuario SET mail='"+req.body.mail+"',pass='"+req.body.pass+"',nombre='"+ req.body.nombre+"',rol='"+req.body.rol+"',celular='"+req.body.celular+"' WHERE idusuario='" + idusuario + "';", function(err, result) {
             
             if(err) {
-                return console.error('error running query', err);
+                  return console.error('error running query', err);
             }
             
             //console.log(result);
-                client.end();
-            return res.json(result);
+            client.end();
+            return res.json("Valio");
         });
-    });
+     });
 });
 
 
