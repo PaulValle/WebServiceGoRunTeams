@@ -97,7 +97,7 @@ app.put('/actualizarUsuario',(req,res)=>{
             return res.status(500).json({success: false, data: err});
         }
 
-        client.query("UPDATE usuario SET mail='"+req.body.mail+"', pass='"+req.body.pass+"', nombre='"+req.body.nombre+"',rol='"+req.body.rol+"',celular='"+req.body.celular+"' WHERE id='" + id + "';", function(err, result) {
+        client.query("UPDATE usuario SET mail='"+req.body.mail+"', pass='"+req.body.pass+"', nombre='"+req.body.nombre+"',rol='"+req.body.rol+"',celular='"+req.body.celular+"' WHERE idusuario='" + id + "';", function(err, result) {
             
             if(err) {
                 return console.error('error running query', err);
